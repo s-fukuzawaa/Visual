@@ -1,0 +1,26 @@
+﻿@page
+@model Visual.Pages.NextModel
+@{
+    ViewData["Title"] = "Next";
+}
+
+<h1>Next</h1>
+<center>
+    @if (Model.upload == 1)
+    {
+        <img src="Imgs\Signature.png" />
+    }
+    @if(Model.upload==0)
+    {
+    <img src="Imgs\hey.@Model.type.Substring(1)" width="400" height="400"/>
+
+    }
+    <h1>I think your object is @Html.ViewData.Model.obj</h1>
+    <h2>And you are @Html.ViewData.Model.score close</h2>
+    <h2>Do you want to know how close your drawing is to a certain object?</h2>
+    <h2>Enter your object below!</h2>
+    <form method="POST">
+        <input type="text" asp-for="@Model.classifier">
+        <button type="submit" id="enter">Enter</button>
+    </form>
+</center>

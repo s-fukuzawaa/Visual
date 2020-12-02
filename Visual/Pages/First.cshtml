@@ -1,0 +1,82 @@
+﻿@page
+@model Visual.Pages.FirstModel
+@{
+    ViewData["Title"] = "First";
+}
+
+<h1>Draw something and lets see what Watson says!</h1>
+<center>
+<section>
+    <form method="POST">
+        <p>
+
+            <input type="text" id="color" asp-for="@Model.color">
+        <p id="check"></p>
+            <button type="button" id="change">Change Color</button>
+        <button type="button" id="eraser">Eraser</button>
+        <button type="button" id="reset">Reset</button>
+            <table>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+            <canvas width="500" height="400" id="signature"
+                    style="border:1px solid black"></canvas>
+            <br>
+            <button type="button" id="accept"
+                    class="btn btn-primary">
+                Accept Drawing
+            </button>
+
+            <button type="submit" id="save"
+                    class="btn btn-primary">
+                Save
+            </button><br>
+            <br>
+            <img width="500" height="400" id="savetarget"
+                 style="border:1px solid black"><br>
+            <input type="text" id="SignatureDataUrl" asp-for="@Model.SignatureDataUrl">
+
+            </p>
+        </form>
+    </section>
+    </center>
+@section Scripts{
+<script src="~/js/Canvas.js" type="text/javascript"></script>
+<script>
+   $(function () {
+       var canvas = document.querySelector('#signature');
+       function Option(color) {
+           this.penColor = color;
+       }
+       
+       var options = new Option('black');
+       var pad = new SignaturePad(canvas, options);
+
+
+       $('#change').click(function () {
+           var x = document.querySelector('#color').value; 
+           pad.penColor = x;
+           pad.minWidth = 0.5;
+           pad.maxWidth = 2.5;
+       })          
+       
+       $('#reset').click(function () {
+           pad = new SignaturePad(canvas, options);
+       })
+       $('#eraser').click(function () {
+           pad.penColor = 'white';
+           pad.minWidth = 2;
+           pad.maxWidth = 10;
+       })
+
+        $('#accept').click(function () {
+            var data = pad.toDataURL();
+            $('#savetarget').attr('src', data);
+            $('#SignatureDataUrl').val(data);
+            pad.off();
+        });
+   });
+    
+</script>
+}

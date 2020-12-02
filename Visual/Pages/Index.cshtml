@@ -1,0 +1,60 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<style>
+    #button:link, #button:visited {
+        background-color: #4ddbff;
+        color: white;
+        border-radius: 18px;
+        padding: 25px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    #button:hover, #button:active {
+        background-color: #1ac6ff;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+</style>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<center>
+    <br><br>
+<h1 class="headline">
+    Art Hoe.
+</h1>
+<h2 class="tagline">You think you can draw?</h2>
+<h3 class="punchline">Well, let's see.</h3>
+<script>
+    ScrollReveal().reveal('.headline');
+    ScrollReveal().reveal('.tagline', { delay: 500 })
+    ScrollReveal().reveal('.punchline', {delay:2000})
+</script>
+
+
+
+
+
+
+    <section style="position:center">
+        <form enctype="multipart/form-data" method="post">
+            <dl>
+                <dt>
+                    <label asp-for="FileUpload.FormFile"></label>
+                </dt>
+                <dd>
+                    <input asp-for="FileUpload.FormFile" type="file">
+                    <span asp-validation-for="FileUpload.FormFile"></span>
+                </dd>
+            </dl>
+            <input asp-page-handler="Upload" class="btn-primary" type="submit" value="Upload" />
+        </form>
+        <br><br>
+        <h5 style="color:white; text-align :center"> <a id="button" style="color:white; margin-right:20px" href="https://localhost:44311/first">Draw and Test</a></h5>
+
+
+    </section>
+</center>
